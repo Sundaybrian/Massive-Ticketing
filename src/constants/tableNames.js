@@ -9,4 +9,6 @@ module.exports = {
   ticket_type: "ticket_type",
   ticket_subtype: "ticket_subtype",
   ticket: "ticket",
+  ticket_history: "ticket_history",
+  resolution: "resolution",
 };

@@ -2,15 +2,10 @@
 
 Create a fullstack crm ticketing system
 
-### Hosting
-
-- [] Heroku
-- [] firebase cloud functions
-
 ### Devops
 
 - [] Circleci
-- [] docker
+- [*] docker
 
 ### Backend
 
@@ -60,4 +55,29 @@ Create a fullstack crm ticketing system
 
 - [] Chat Messages
 
-### Commands
+## commands
+
+sudo docker-compose up
+sudo docker volume rm \$(sudo docker volume ls -q)
+sudo docker system prune -a
+sudo docker-compose down -v
+
+## knex
+
+npm i knex
+npx knex init ## initialize knex
+
+## knex migrations
+
+npx knex migrate:make migration_name
+npx knex migrate:latest
+npx knex migrate:rollback
+
+## eslint
+
+npx eslint --init
+
+### Hosting
+
+- [] Heroku
+- [] firebase cloud functions
