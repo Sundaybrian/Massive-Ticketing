@@ -12,9 +12,9 @@ module.exports = {
     client: "pg",
     connection: {
       host: "127.0.0.1",
-      database: process.env.POSTGRESS_DB,
-      user: process.env.POSTGRESS_USER,
-      password: process.env.POSTGRESS_PASSWORD,
+      database: process.env.POSTGRES_DB,
+      user: process.env.POSTGRES_USER,
+      password: process.env.POSTGRES_PASSWORD,
     },
     migrations: {
       directory: __dirname + "/db/migrations",

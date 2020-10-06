@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "migrate": "npx knex migrate:make latest",
-    "rollback": "npx knex migrate:rollback"
+    "migrate": "knex migrate:latest",
+    "rollback": "knex migrate:rollback"
   },
   "keywords": [],
   "author": "",
