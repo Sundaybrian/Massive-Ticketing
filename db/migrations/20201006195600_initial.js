@@ -96,11 +96,30 @@ exports.up = async function (knex) {
     references(table, tableNames.ticket_subtype);
     addDefaultColumns(table);
   });
+
+  await knex.schema.createTable(tableNames.ticket_history, (table) => {
+    table.increments().notNullable();
+    references(table, table.user);
+    references(table, tableNames.status);
+    references(table, tableNames.ticket);
+    references(table, table.sla);
+    table.string("comment", 1500).notNullable();
+    addDefaultColumns(table);
+  });
+
+  await knex.schema.createTable(tableNames.resolution, (table) => {
+    table.increments().notNullable();
+    references(table, table.ticket_history);
+    table.string("description", 1500).notNullable();
+    addDefaultColumns(table);
+  });
 };
 
 exports.down = async function (knex) {
   await Promise.all(
     [
+      resolution,
+      ticket_history,
       ticket,
       ticket_subtype,
       ticket_type,
