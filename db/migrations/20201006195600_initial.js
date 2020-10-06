@@ -18,7 +18,8 @@ function references(table, tableName) {
     .integer(`${tableName}_id`)
     .unsigned()
     .references("id")
-    .inTable(tableName);
+    .inTable(tableName)
+    .onDelete("cascade");
 }
 /** @param {Knex} knex */
 exports.up = async function (knex) {
@@ -56,6 +57,7 @@ exports.up = async function (knex) {
     table.string("email", 254).notNullable().unique();
     table.string("image_url", 2000);
     table.boolean("active").notNullable().defaultTo(false);
+    references(table, tableNames.department);
     addDefaultColumns(table);
   });
 
@@ -76,7 +78,22 @@ exports.up = async function (knex) {
 
   await knex.schema.createTable(tableNames.ticket_type, (table) => {
     addNameDesc(table);
+    references(table, tableNames.department);
+    addDefaultColumns(table);
+  });
+
+  await knex.schema.createTable(tableNames.ticket_subtype, (table) => {
+    addNameDesc(table);
     references(table, tableNames.ticket_type);
+    addDefaultColumns(table);
+  });
+
+  await knex.schema.createTable(tableNames.ticket, (table) => {
+    table.increments().notNullable();
+    table.string("issue_summary", 600).notNullable();
+    table.string("description", 1300).notNullable();
+    references(table, table.user);
+    references(table, tableNames.ticket_subtype);
     addDefaultColumns(table);
   });
 };
@@ -84,6 +101,8 @@ exports.up = async function (knex) {
 exports.down = async function (knex) {
   await Promise.all(
     [
+      ticket,
+      ticket_subtype,
       ticket_type,
       role_user,
       auth,
