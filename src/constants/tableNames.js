@@ -5,4 +5,6 @@ module.exports = {
   role: "role",
   user: "user",
   auth: "auth",
+  role_user: "role_user",
+  ticket_type: "ticket_type",
 };
