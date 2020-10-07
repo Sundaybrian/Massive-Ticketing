@@ -72,6 +72,7 @@ npx knex init ## initialize knex
 npx knex migrate:make migration_name
 npx knex migrate:latest
 npx knex migrate:rollback
+npx knex seed:make initial
 
 ## eslint
 
