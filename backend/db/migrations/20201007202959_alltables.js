@@ -1,5 +1,7 @@
 const Knex = require("knex");
 
+const tableNames = require("../../src/constants/tableNames");
+
 const {
   addDefaultColumns,
   addNameDesc,
@@ -51,24 +53,24 @@ exports.up = async function (knex) {
     table.increments().notNullable();
     table.string("issue_summary", 600).notNullable();
     table.string("description", 1300).notNullable();
-    references(table, table.user);
+    references(table, tableNames.user);
     references(table, tableNames.ticket_subtype);
     addDefaultColumns(table);
   });
 
   await knex.schema.createTable(tableNames.ticket_history, (table) => {
     table.increments().notNullable();
-    references(table, table.user);
+    references(table, tableNames.user);
     references(table, tableNames.status);
     references(table, tableNames.ticket);
-    references(table, table.sla);
+    references(table, tableNames.sla);
     table.string("comment", 1500).notNullable();
     addDefaultColumns(table);
   });
 
   await knex.schema.createTable(tableNames.resolution, (table) => {
     table.increments().notNullable();
-    references(table, table.ticket_history);
+    references(table, tableNames.ticket_history);
     table.string("description", 1500).notNullable();
     addDefaultColumns(table);
   });

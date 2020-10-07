@@ -69,8 +69,8 @@ npx knex init ## initialize knex
 
 ## knex migrations
 
-npx knex migrate:make migration_name
-npx knex migrate:latest
+npx knex migrate:make migration_name // create a migration file
+npx knex migrate:latest // migrate the most recent migration file
 npx knex migrate:rollback
 npx knex seed:make initial
 
