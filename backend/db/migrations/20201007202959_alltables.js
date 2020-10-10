@@ -60,7 +60,7 @@ exports.up = async function (knex) {
 
   await knex.schema.createTable(tableNames.ticket_history, (table) => {
     table.increments().notNullable();
-    references(table, tableNames.user);
+    references(table, tableNames.user, "assigned_staff");
     references(table, tableNames.status);
     references(table, tableNames.ticket);
     references(table, tableNames.sla);
@@ -88,6 +88,6 @@ exports.down = async function (knex) {
       role_user,
       auth,
       user,
-    ].map((tableName) => knex.schema.dropTable(tableName))
+    ].map((tableName) => knex.schema.dropTableIfExists(tableName))
   );
 };

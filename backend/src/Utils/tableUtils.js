@@ -9,13 +9,14 @@ function addNameDesc(table) {
   table.string("description", 1500).notNullable();
 }
 
-function references(table, tableName) {
+function references(table, tableName, columnName = null) {
   table
-    .integer(`${tableName}_id`)
+    .integer(`${columnName || tableName}_id`)
     .unsigned()
     .references("id")
     .inTable(tableName)
-    .onDelete("cascade");
+    .onDelete("cascade")
+    .notNullable();
 }
 
 module.exports = {
