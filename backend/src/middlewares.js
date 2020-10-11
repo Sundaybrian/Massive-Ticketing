@@ -1,23 +1,16 @@
-const express = require("express");
-const morgan = require("morgan");
-const compression = require("compression");
-const helmet = require("helmet");
-const middlewares = require("./middlewares");
+function notFound(req, res, next) {
+  const error = new Error(`Not found - ${req.originialUrl}`);
+  res.status(404);
+  next(error);
+}
 
-const app = express();
-
-app.use(morgan("dev"));
-app.use(compression());
-app.use(helmet());
-app.use(express.json());
-
-app.get("/", (req, res) => {
+function errorHandler(error, req, res, next) {
+  const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
   res.json({
-    message: "Welcome tp ticketing app api",
+    message: error.message,
+    stack:
+      process.env.NODE_ENV === "production"
+        ? "Oh boy! it must be that bad"
+        : error.stack,
   });
-});
-
-app.use(middlewares.notFound);
-app.use(middlewares.errorHandler);
-
-module.exports = app;
+}
