@@ -78,16 +78,17 @@ exports.up = async function (knex) {
 
 /** @param {Knex} knex */
 exports.down = async function (knex) {
+  // drop tables with order of relations
   await Promise.all(
     [
-      resolution,
-      ticket_history,
-      ticket,
-      ticket_subtype,
-      ticket_type,
-      role_user,
-      auth,
-      user,
+      tableNames.resolution,
+      tableNames.ticket_history,
+      tableNames.ticket,
+      tableNames.ticket_subtype,
+      tableNames.ticket_type,
+      tableNames.role_user,
+      tableNames.auth,
+      tableNames.user,
     ].map((tableName) => knex.schema.dropTableIfExists(tableName))
   );
 };
