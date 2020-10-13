@@ -8,7 +8,7 @@ describe("Get /api/v1/status", () => {
       .expect("Content-Type", /json/)
       .expect(200);
 
-    expect(res.body).toEqual([]);
+    expect(res.body.length).toBeGreaterThan(0);
   });
 });
 
