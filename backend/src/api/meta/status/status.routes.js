@@ -6,7 +6,10 @@ const queries = require("./status.queries");
 router.get("/", async (req, res, next) => {
   try {
     const statuses = await queries.find();
-    res.json(statuses);
+    if (statuses.length > 0) {
+      res.json(statuses);
+    }
+    return next();
   } catch (error) {
     next(error);
   }

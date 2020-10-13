@@ -6,6 +6,7 @@
   "scripts": {
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
+    "rollback:test": "knex migrate:rollback --env test",
     "seed": "knex seed:run",
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
