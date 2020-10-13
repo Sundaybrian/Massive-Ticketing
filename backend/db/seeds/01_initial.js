@@ -1,3 +1,5 @@
+// TODO: SEED DB WITH INITAL DATA
+
 exports.seed = async (knex) => {
   // Deletes ALL existing entries
   await knex("table_name").del();

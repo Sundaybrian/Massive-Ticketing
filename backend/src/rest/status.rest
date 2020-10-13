@@ -1,0 +1,5 @@
+### find all
+GET http://localhost:5000/api/v1/status
+
+### find by id
+GET http://localhost:5000/api/v1/status/kjhkjhkjhj
