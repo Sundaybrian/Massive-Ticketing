@@ -12,4 +12,14 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.get("/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const status = await queries.get(parseInt(id) || 0);
+    res.json(status);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
