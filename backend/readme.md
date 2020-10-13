@@ -45,6 +45,7 @@ A fullstack app (mobile, frontend, backend) to keep track of tickets raised by u
 - npx knex migrate:rollback
 - npx knex seed:make initial
 - npx knex seed:run
+- npx knex migrate:rollback --env test_environment e.g prod, dev test
 
 ## eslint
 
