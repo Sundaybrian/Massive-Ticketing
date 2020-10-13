@@ -3,6 +3,7 @@ const router = express.Router();
 
 const queries = require("./status.queries");
 
+// find all
 router.get("/", async (req, res, next) => {
   try {
     const statuses = await queries.find();
@@ -15,6 +16,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+// find by id
 router.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -25,6 +27,22 @@ router.get("/:id", async (req, res, next) => {
 
     return next();
   } catch (error) {
+    next(error);
+  }
+});
+
+// create status
+router.post("/", async (req, res, next) => {
+  try {
+    const { name, description } = req.body;
+    const status = await queries.create({ name, description });
+
+    if (status) {
+      res.status(201);
+      return res.json(status);
+    }
+  } catch (error) {
+    console.log(error);
     next(error);
   }
 });

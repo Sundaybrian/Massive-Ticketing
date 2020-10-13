@@ -9,5 +9,6 @@ exports.seed = async (knex) => {
     { id: 1, name: "rowValue1", description: "lorem ipum lorem ipsum lorem" },
     { id: 2, name: "rowValue2", description: "lorem ipum lorem ipsum lorem" },
     { id: 3, name: "rowValue3", description: "lorem ipum lorem ipsum lorem" },
+    { id: 4, name: "rowValue13", description: "lorem ipum lorem ipsum lorem" },
   ]);
 };
