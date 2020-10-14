@@ -18,10 +18,9 @@ module.exports = {
   },
   // create a status
   async create(item) {
-    const [status] = await db(tableNames.status)
+    const status = await db(tableNames.status)
       .insert(item)
-      .select("id", "name", "description")
-      .returning("*");
+      .returning("id", "name", "description");
     return status;
   },
 };

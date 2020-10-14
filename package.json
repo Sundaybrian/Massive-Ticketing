@@ -27,12 +27,22 @@
     "knex": "^0.21.5-next2",
     "morgan": "^1.10.0",
     "objection": "^2.2.3",
-    "pg": "^8.3.0"
+    "pg": "^8.3.0",
+    "yup": "^0.29.3"
   },
   "devDependencies": {
     "eslint": "^7.7.0",
     "jest": "^26.5.3",
     "nodemon": "^2.0.4",
     "supertest": "^5.0.0"
-  }
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "activationEvents": [
+    "workspaceContains:node_modules/.bin/jest",
+    "workspaceContains:node_modules/react-scripts/node_modules/.bin/jest",
+    "workspaceContains:node_modules/react-native-scripts",
+    "onCommand:io.orta.jest.start"
+  ]
 }

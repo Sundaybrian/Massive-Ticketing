@@ -34,8 +34,7 @@ router.get("/:id", async (req, res, next) => {
 // create status
 router.post("/", async (req, res, next) => {
   try {
-    const { name, description } = req.body;
-    const status = await queries.create({ name, description });
+    const status = await queries.create(req.body);
 
     if (status) {
       res.status(201);

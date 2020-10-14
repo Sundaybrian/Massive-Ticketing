@@ -1,6 +1,8 @@
 const request = require("supertest");
 const app = require("../../../app");
 const db = require("../../../db");
+const setup = require("../../../setupTests");
+const teardown = require("../../../teardownTests");
 
 describe("Get /api/v1/status", () => {
   it("Should return an array of statuses", async () => {
@@ -9,7 +11,7 @@ describe("Get /api/v1/status", () => {
       .expect("Content-Type", /json/)
       .expect(200);
 
-    expect(res.body.length).toBeGreaterThan(0);
+    expect(res.body.length).toBeGreaterThan(3);
   });
 });
 
@@ -25,7 +27,7 @@ describe("Get /api/v1/status/:id", () => {
 
   it("Should return 404 for a not found status", async () => {
     await request(app)
-      .get("/api/v1/status/5")
+      .get("/api/v1/status/99")
       .expect("Content-Type", /json/)
       .expect(404);
   });

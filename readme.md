@@ -5,7 +5,7 @@ A fullstack app (mobile, frontend, backend) to keep track of tickets raised by u
 ## Backend Setup
 
 - Create `.env` with your values. A sample env is provided
-- `npm install ` to install dependencies
+- `npm install` to install dependencies
 - You can run the db as a container using `docker-compose up`
 - Migrate db using `npm run migrate`
 
@@ -37,7 +37,7 @@ A fullstack app (mobile, frontend, backend) to keep track of tickets raised by u
 - npm i knex
 - npx knex init ## initialize knex
 
-## knex migrations
+## knex migrations and seeds
 
 - npx knex migrate:make migration_name // create a migration file
 - npx knex migrate:latest // migrate the most recent migration file\
@@ -45,7 +45,12 @@ A fullstack app (mobile, frontend, backend) to keep track of tickets raised by u
 - npx knex migrate:rollback
 - npx knex seed:make initial
 - npx knex seed:run
+- npx knex migrate:rollback --env test_environment e.g prod, dev test
 
 ## eslint
 
 - npx eslint --init
+
+## jest
+
+- npx jest init
