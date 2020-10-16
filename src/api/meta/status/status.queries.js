@@ -18,9 +18,22 @@ module.exports = {
   },
   // create a status
   async create(item) {
-    const status = await db(tableNames.status)
-      .insert(item)
-      .returning("id", "name", "description");
+    const [status] = await db(tableNames.status).insert(item, [
+      "id",
+      "name",
+      "description",
+    ]);
     return status;
   },
+
+  //update status
+  async update(id, payload) {
+    const [status] = await db(tableNames.status)
+      .where({ id })
+      .update({ ...payload }, ["id", "name", "description"]);
+
+    return status;
+  },
+
+  // TODO: should we delete a status delete status
 };

@@ -37,9 +37,36 @@ router.post("/", async (req, res, next) => {
     const status = await queries.create(req.body);
 
     if (status) {
-      res.status(201);
-      return res.json(status);
+      return res.status(201).json(status);
     }
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+});
+
+// update status
+router.patch("/:id", async (req, res, next) => {
+  const { id } = req.params;
+  const updates = Object.keys(req.body);
+  const allowedUpdates = ["name", "description"];
+  const isValidUpdates = updates.every((item) => {
+    return allowedUpdates.includes(item);
+  });
+
+  if (!isValidUpdates) {
+    res.status(403);
+    return next("Invalid Updates");
+  }
+
+  try {
+    const status = await queries.update(id, req.body);
+
+    if (!status) {
+      return res.status(404);
+    }
+
+    res.status(200).json(status);
   } catch (error) {
     console.log(error);
     next(error);

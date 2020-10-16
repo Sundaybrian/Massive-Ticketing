@@ -1,8 +1,5 @@
 const request = require("supertest");
 const app = require("../../../app");
-const db = require("../../../db");
-const setup = require("../../../setupTests");
-const teardown = require("../../../teardownTests");
 
 describe("Get /api/v1/status", () => {
   it("Should return an array of statuses", async () => {
@@ -38,11 +35,47 @@ describe("POST /api/v1/status", () => {
     const res = await request(app)
       .post("/api/v1/status")
       .send({
+        id: 7,
         name: "test status",
         description: "test status desc",
       })
       .expect(201);
 
-    expect(res.name).toBe("test status");
+    expect(res.body.name).toEqual("test status");
+  });
+});
+
+describe("PATCH /api/v1/status/:id", () => {
+  it("Should return an updated status", async () => {
+    const res = await request(app)
+      .patch("/api/v1/status/1")
+      .send({
+        name: "test status 1",
+        description: "test status desc 1",
+      })
+      .expect(200);
+
+    expect(res.body.name).toEqual("test status 1");
+  });
+
+  it("Should not update a status", async () => {
+    await request(app)
+      .patch("/api/v1/status/1")
+      .send({
+        name: "test status 1",
+        description: "test status desc 1",
+        value: "lorem not allowed",
+      })
+      .expect(403);
+  });
+
+  it("Should fail to update a non-existent status", async () => {
+    await request(app)
+      .patch("/api/v1/status/8")
+      .send({
+        name: "test status 8",
+        description: "test status desc 8",
+      })
+      .expect(404);
   });
 });
