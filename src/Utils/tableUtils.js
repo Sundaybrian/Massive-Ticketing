@@ -9,14 +9,19 @@ function addNameDesc(table) {
   table.string("description", 1500).notNullable();
 }
 
-function references(table, tableName, columnName = null) {
-  table
+function references(table, tableName, columnName = null, notNullable = true) {
+  const definition = table
     .integer(`${columnName || tableName}_id`)
     .unsigned()
     .references("id")
     .inTable(tableName)
-    .onDelete("cascade")
-    .notNullable();
+    .onDelete("cascade");
+
+  if (notNullable) {
+    definition.notNullable();
+  }
+
+  return definition;
 }
 
 module.exports = {
