@@ -10,3 +10,11 @@ exports.signupSchema = (req, res, next) => {
   });
   validateRequest(req, next, schema);
 };
+
+exports.signinSchema = (req, res, next) => {
+  const schema = Joi.object({
+    email: Joi.string().email().required(),
+    password: Joi.string().min(8).required(),
+  });
+  validateRequest(req, next, schema);
+};

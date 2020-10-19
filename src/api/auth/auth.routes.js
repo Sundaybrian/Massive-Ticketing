@@ -3,7 +3,8 @@ const router = express.Router();
 const User = require("../users/users.model");
 const jwt = require("../../Utils/jwt");
 
-const { signupSchema } = require("./auth.validators");
+const { signupSchema, signinSchema } = require("./auth.validators");
+const Auth = require("./auth.model");
 
 router.post("/signup", signupSchema, signup);
 router.post("/signin", signinSchema, signin);
@@ -28,7 +29,13 @@ async function signup(req, res, next) {
       email,
     });
 
-    // TODO insert to auth table too
+    // insert user to auth table
+    const authUser = await Auth.query().insert({
+      user_id: insertedUser.id,
+      hashedPassword,
+      active: true,
+    });
+
     const payload = {
       ...insertedUser,
     };
@@ -36,6 +43,43 @@ async function signup(req, res, next) {
     const token = await jwt.sign(payload);
 
     res.status(201).json({
+      user: payload,
+      token,
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function signin(req, res, next) {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.query().where({ email }).first();
+    if (!user) {
+      const error = new Error("Email already in use");
+      res.status(403);
+      throw error;
+    }
+
+    const authUser = await Auth.query().where({ user_id: user.id }).first();
+
+    const validPassword = await bcrypt.compare(password, authUser.password);
+
+    if (!validPassword) {
+      const error = new Error(errorMessages.invalidLogin);
+      res.status(403);
+      throw error;
+    }
+
+    const payload = {
+      id: user.id,
+      fullname: user.name,
+      email,
+    };
+
+    const token = await jwt.sign(payload);
+    res.json({
       user: payload,
       token,
     });
