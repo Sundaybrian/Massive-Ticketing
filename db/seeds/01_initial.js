@@ -12,15 +12,24 @@ exports.seed = async (knex) => {
     })
   );
 
-  const password = crypto.randomBytes(15).toString("hex");
+  const password = await bcrypt.hash(
+    crypto.randomBytes(15).toString("hex"),
+    10
+  );
 
   const user = {
     email: "sunday@omwami.com",
-    name: "sunday omwami",
-    password: await bcrypt.hash(password, 10),
+    fullname: "sunday omwami",
+    active: true,
   };
 
   const [createdUser] = await knex(tableNames.user).insert(user).returning("*");
+
+  const [authUser] = await knex(tableNames.auth).insert({
+    user_id: createdUser.id,
+    password,
+    active: createdUser.active,
+  });
 
   // Inserts seed entries
   await knex(tableNames.status).insert([
