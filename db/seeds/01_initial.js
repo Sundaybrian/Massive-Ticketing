@@ -25,11 +25,13 @@ exports.seed = async (knex) => {
 
   const [createdUser] = await knex(tableNames.user).insert(user).returning("*");
 
-  const [authUser] = await knex(tableNames.auth).insert({
-    user_id: createdUser.id,
-    password,
-    active: createdUser.active,
-  });
+  const [authUser] = await knex(tableNames.auth)
+    .insert({
+      user_id: createdUser.id,
+      password,
+      active: createdUser.active,
+    })
+    .returning("*");
 
   // Inserts seed entries
   await knex(tableNames.status).insert([
