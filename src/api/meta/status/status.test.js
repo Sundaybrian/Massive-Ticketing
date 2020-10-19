@@ -35,7 +35,6 @@ describe("POST /api/v1/status", () => {
     const res = await request(app)
       .post("/api/v1/status")
       .send({
-        id: 7,
         name: "test status",
         description: "test status desc",
       })
