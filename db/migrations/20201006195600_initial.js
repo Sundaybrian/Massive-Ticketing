@@ -29,7 +29,7 @@ exports.up = async function (knex) {
       addDefaultColumns(table);
     }),
 
-    await knex.schema.createTable(tableNames.role, (table) => {
+    knex.schema.createTable(tableNames.role, (table) => {
       addNameDesc(table);
       addDefaultColumns(table);
     }),
@@ -43,6 +43,6 @@ exports.down = async function (knex) {
       tableNames.sla,
       tableNames.status,
       tableNames.role,
-    ].map((tablename) => knex.schema.dropTable(tablename))
+    ].map((tablename) => knex.schema.dropTableIfExists(tablename))
   );
 };

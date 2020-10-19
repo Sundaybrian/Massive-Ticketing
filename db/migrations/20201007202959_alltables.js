@@ -18,7 +18,7 @@ exports.up = async function (knex) {
     table.string("email", 254).notNullable().unique();
     table.string("image_url", 2000);
     table.boolean("active").notNullable().defaultTo(false);
-    references(table, tableNames.department);
+    references(table, tableNames.department, null, false);
     addDefaultColumns(table);
   });
 
@@ -60,7 +60,7 @@ exports.up = async function (knex) {
 
   await knex.schema.createTable(tableNames.ticket_history, (table) => {
     table.increments().notNullable();
-    references(table, tableNames.user);
+    references(table, tableNames.user, "assigned_staff");
     references(table, tableNames.status);
     references(table, tableNames.ticket);
     references(table, tableNames.sla);
@@ -78,16 +78,17 @@ exports.up = async function (knex) {
 
 /** @param {Knex} knex */
 exports.down = async function (knex) {
+  // drop tables with order of relations
   await Promise.all(
     [
-      resolution,
-      ticket_history,
-      ticket,
-      ticket_subtype,
-      ticket_type,
-      role_user,
-      auth,
-      user,
-    ].map((tableName) => knex.schema.dropTable(tableName))
+      tableNames.resolution,
+      tableNames.ticket_history,
+      tableNames.ticket,
+      tableNames.ticket_subtype,
+      tableNames.ticket_type,
+      tableNames.role_user,
+      tableNames.auth,
+      tableNames.user,
+    ].map((tableName) => knex.schema.dropTableIfExists(tableName))
   );
 };

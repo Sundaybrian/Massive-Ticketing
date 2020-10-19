@@ -1,0 +1,15 @@
+### find all
+GET http://localhost:5000/api/v1/status
+
+### find by id
+GET http://localhost:5000/api/v1/status/1
+
+
+### create status
+POST http://localhost:5000/api/v1/status
+Content-Type: application/json
+
+{
+    "name":"new statuss",
+    "description":"new dessc"
+}

@@ -1,0 +1,16 @@
+=================================================
+[] sign up
+[] sign in
+[] jwt, refresh tokens
+[] setup objectionjs
+[] validation hapi/joi or yup
+[*] new seed, for user data
+[] user crud routes 
+[] email signup verfication, authentication, forgot password
+[] write tests
+[] setup circle ci
+[] setup heroku
+[] setup 
+[epic][] setup swagger 
++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++
