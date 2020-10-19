@@ -1,9 +1,27 @@
 // TODO: SEED DB WITH INITAL DATA
+const crypto = require("crypto");
+const bcrypt = require("bcrypt");
+
 const tableNames = require("../../src/constants/tableNames");
 
 exports.seed = async (knex) => {
   // Deletes ALL existing entries
-  await knex(tableNames.status).del();
+  await Promise.all(
+    Object.keys(tableNames).map((name) => {
+      return knex(name).del();
+    })
+  );
+
+  const password = crypto.randomBytes(15).toString("hex");
+
+  const user = {
+    email: "sunday@omwami.com",
+    name: "sunday omwami",
+    password: await bcrypt.hash(password, 10),
+  };
+
+  const [createdUser] = await knex(tableNames.user).insert(user).returning("*");
+
   // Inserts seed entries
   await knex(tableNames.status).insert([
     { id: 1, name: "rowValue1", description: "lorem ipum lorem ipsum lorem" },
