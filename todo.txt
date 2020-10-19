@@ -6,11 +6,14 @@
 [] validation hapi/joi or yup
 [*] new seed, for user data
 [] user crud routes 
-[] email signup verfication, authentication, forgot password
+[] email signup verfication,
+[] authentication, 
+[] forgot password
 [] write tests
 [] setup circle ci
 [] setup heroku
 [] setup 
 [epic][] setup swagger 
+[] rethink the tables, do we need an Auth Table really?
 +++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++

@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require("../users/users.model");
 const Auth = require("./auth.model");
 const jwt = require("../../Utils/jwt");
+const bcrypt = require("bcrypt");
 
 const { signupSchema, signinSchema } = require("./auth.validators");
 
@@ -13,11 +14,10 @@ module.exports = router;
 
 async function signup(req, res, next) {
   const { fullname, email, password } = req.body;
-  console.log(req.body);
+
   try {
     const existingUser = await User.query().where({ email }).first();
     if (existingUser) {
-      console.log(existingUser);
       const error = new Error("Email already in use");
       res.status(403);
       throw error;
@@ -32,9 +32,10 @@ async function signup(req, res, next) {
     });
 
     // insert user to auth table
+    // TODO: THIS TABLE IS USELESS
     const authUser = await Auth.query().insert({
       user_id: insertedUser.id,
-      hashedPassword,
+      password: hashedPassword,
       active: true,
     });
 
@@ -49,7 +50,6 @@ async function signup(req, res, next) {
       token,
     });
   } catch (error) {
-    console.log(error);
     next(error);
   }
 }

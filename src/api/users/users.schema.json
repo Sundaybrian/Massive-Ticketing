@@ -3,7 +3,7 @@
   "type": "object",
   "title": "User",
   "description": "The User",
-  "required": ["email", "name", "password"],
+  "required": ["email", "fullname"],
   "additionalProperties": true,
   "properties": {
     "id": {
@@ -17,7 +17,7 @@
       "title": "The users email. Must be unique.",
       "examples": ["sunday@omwami.com"]
     },
-    "name": {
+    "fullname": {
       "$id": "#/properties/name",
       "type": "string",
       "title": "The users name.",
