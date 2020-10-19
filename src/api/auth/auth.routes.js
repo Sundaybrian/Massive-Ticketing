@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../users/users.model");
+const Auth = require("./auth.model");
 const jwt = require("../../Utils/jwt");
 
 const { signupSchema, signinSchema } = require("./auth.validators");
-const Auth = require("./auth.model");
 
 router.post("/signup", signupSchema, signup);
 router.post("/signin", signinSchema, signin);
@@ -13,9 +13,11 @@ module.exports = router;
 
 async function signup(req, res, next) {
   const { fullname, email, password } = req.body;
+  console.log(req.body);
   try {
     const existingUser = await User.query().where({ email }).first();
     if (existingUser) {
+      console.log(existingUser);
       const error = new Error("Email already in use");
       res.status(403);
       throw error;
@@ -47,6 +49,7 @@ async function signup(req, res, next) {
       token,
     });
   } catch (error) {
+    console.log(error);
     next(error);
   }
 }
@@ -67,7 +70,7 @@ async function signin(req, res, next) {
     const validPassword = await bcrypt.compare(password, authUser.password);
 
     if (!validPassword) {
-      const error = new Error(errorMessages.invalidLogin);
+      const error = new Error("Invalid login credentials");
       res.status(403);
       throw error;
     }

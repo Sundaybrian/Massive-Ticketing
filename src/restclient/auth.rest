@@ -1,0 +1,20 @@
+
+
+### register
+POST http://localhost:5000/api/v1/auth/signup
+Content-Type: application/json
+
+{
+    "fullname":"new person",
+    "email":"new@person.com",
+    "confirmPassword":"jkilopjs"
+}
+
+### login
+POST http://localhost:5000/api/v1/auth/signin
+Content-Type: application/json
+
+{
+    "name":"new statuss",
+    "description":"new dessc"
+}
