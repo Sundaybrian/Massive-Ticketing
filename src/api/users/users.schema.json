@@ -3,7 +3,7 @@
   "type": "object",
   "title": "User",
   "description": "The User",
-  "required": ["email", "fullname"],
+  "required": ["email", "fullname", "password"],
   "additionalProperties": true,
   "properties": {
     "id": {

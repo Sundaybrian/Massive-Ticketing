@@ -17,6 +17,7 @@ exports.up = async function (knex) {
     table.string("fullname", 100).notNullable();
     table.string("email", 254).notNullable().unique();
     table.string("image_url", 2000);
+    table.string("password", 180).notNullable();
     table.boolean("active").notNullable().defaultTo(false);
     references(table, tableNames.department, null, false);
     addDefaultColumns(table);

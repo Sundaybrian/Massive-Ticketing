@@ -26,18 +26,14 @@ async function signup(req, res, next) {
 
     // create account
     const hashedPassword = await bcrypt.hash(password, 10);
-    const insertedUser = await User.query().insert({
-      fullname,
-      email,
-    });
-
-    // insert user to auth table
-    // TODO: THIS TABLE IS USELESS
-    const authUser = await Auth.query().insert({
-      user_id: insertedUser.id,
-      password: hashedPassword,
-      active: true,
-    });
+    const insertedUser = await User.query()
+      .insert({
+        fullname,
+        email,
+        password: hashedPassword,
+        active: true,
+      })
+      .returning("id", "fullname", "email", "active", "created_at");
 
     const payload = {
       ...insertedUser,
@@ -65,9 +61,7 @@ async function signin(req, res, next) {
       throw error;
     }
 
-    const authUser = await Auth.query().where({ user_id: user.id }).first();
-
-    const validPassword = await bcrypt.compare(password, authUser.password);
+    const validPassword = await bcrypt.compare(password, user.password);
 
     if (!validPassword) {
       const error = new Error("Invalid login credentials");
@@ -77,8 +71,9 @@ async function signin(req, res, next) {
 
     const payload = {
       id: user.id,
-      fullname: user.name,
+      fullname: user.fullname,
       email,
+      created_at: user.created_at,
     };
 
     const token = await jwt.sign(payload);

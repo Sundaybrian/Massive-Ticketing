@@ -14,6 +14,7 @@
 [] setup heroku
 [] setup 
 [epic][] setup swagger 
-[] rethink the tables, do we need an Auth Table really?
+[*] rethink the tables, do we need an Auth Table really?
+    [*] will leave it in for now, to be repurposed later
 +++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++
