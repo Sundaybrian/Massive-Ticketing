@@ -9,6 +9,7 @@
 [*] write tests
 [] setup circle ci
 [] setup heroku 
+[] fix status routes
 [epic][] setup swagger 
 [] refresh tokens
 [] email signup verfication,

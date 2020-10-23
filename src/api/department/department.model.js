@@ -6,3 +6,5 @@ class Department extends Model {
     return tableNames.department;
   }
 }
+
+module.exports = Department;
