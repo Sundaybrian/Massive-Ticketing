@@ -25,14 +25,15 @@ async function signup(req, res, next) {
 
     // create account
     const hashedPassword = await bcrypt.hash(password, 10);
-    const insertedUser = await User.query()
-      .insert({
+    const insertedUser = await User.query().insert(
+      {
         fullname,
         email,
         password: hashedPassword,
         active: true,
-      })
-      .returning("id", "fullname", "email", "active", "created_at");
+      },
+      ["id", "fullname", "email", "active", "created_at", "image_url"]
+    );
 
     const payload = {
       ...insertedUser,
