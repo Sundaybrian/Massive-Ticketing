@@ -55,16 +55,12 @@ async function signin(req, res, next) {
 
   try {
     const user = await User.query().where({ email }).first();
-    if (!user) {
-      const error = new Error("Email already in use");
-      res.status(403);
-      throw error;
-    }
-
-    const validPassword = await bcrypt.compare(password, user.password);
-
-    if (!validPassword) {
-      const error = new Error("Invalid login credentials");
+    if (
+      !user ||
+      !user.active ||
+      !(await bcrypt.compare(password, user.password))
+    ) {
+      const error = new Error("Email or password is incorrect");
       res.status(403);
       throw error;
     }
