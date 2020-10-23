@@ -39,13 +39,9 @@ async function updateUser(req, res, next) {
   try {
     const user = await update(id, req.body);
 
-    // if (!user) {
-    //   const error = new Error("User not found");
-    //   res.status(404);
-    //   throw error;
-    // }
     res.json(user);
   } catch (error) {
+    console.log(error);
     next(error);
   }
 }
