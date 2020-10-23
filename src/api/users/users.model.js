@@ -1,7 +1,6 @@
 const { Model } = require("objection");
 const tableNames = require("../../constants/tableNames");
 const userSchema = require("./users.schema.json");
-const Auth = require("../auth/auth.model");
 
 class User extends Model {
   static get tableName() {
@@ -13,13 +12,15 @@ class User extends Model {
   }
 
   static get relationMappings() {
+    const Department = require("../department/department.model");
+
     return {
-      auth: {
-        relation: Model.HasOneRelation,
-        modelClass: Auth,
+      department: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: Department,
         join: {
-          from: `${tableNames.user}.id`,
-          to: `${tableNames.auth}.user_id`,
+          from: `${tableNames.department}.id`,
+          to: `${tableNames.user}.department_id`,
         },
       },
     };

@@ -7,6 +7,16 @@
 [*] new seed, for user data
 [] user crud routes 
 [*] write tests
+[] finish up models and relations
+    [] Role
+    [] Role_User
+    [] Ticket Type
+    [] Ticket Subtype
+    [] Ticket
+    [] Ticket history
+    [] Sla
+    [] status
+    [] Resolution
 [] setup circle ci
 [] setup heroku 
 [] fix status routes
