@@ -39,9 +39,9 @@ async function updateUser(req, res, next) {
   try {
     const user = await update(id, req.body);
 
+    console.log(user);
     res.json(user);
   } catch (error) {
-    console.log(error);
     next(error);
   }
 }
@@ -76,7 +76,9 @@ async function update(id, params) {
     params.password = await hash(params.password);
   }
 
-  await account.$query().patchAndFetch({ ...params });
+  const updatedUser = await User.query().patchAndFetchById(id, { ...params });
+
+  return basicDetails(updatedUser);
 }
 
 async function hash(password) {
