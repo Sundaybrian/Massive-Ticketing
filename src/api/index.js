@@ -13,5 +13,7 @@ router.get("/", (req, res) => {
 
 router.use("/status", status);
 router.use("/users", users);
+router.use("/auth", require("./auth/auth.routes"));
+router.use("/department", require("./department/department.routes"));
 
 module.exports = router;

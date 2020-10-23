@@ -1,16 +1,32 @@
 =================================================
-[] sign up
-[] sign in
-[] jwt, refresh tokens
-[] setup objectionjs
-[] validation hapi/joi or yup
+[*] sign up
+[*] sign in
+[*] jwt
+[*] setup objectionjs
+[*] validation hapi/joi or yup
 [*] new seed, for user data
 [] user crud routes 
-[] email signup verfication, authentication, forgot password
-[] write tests
+[*] write tests
+[] finish up models and relations
+    [] Role
+    [] Role_User
+    [] Ticket Type
+    [] Ticket Subtype
+    [] Ticket
+    [] Ticket history
+    [] Sla
+    [] status
+    [] Resolution
+[] authentication middlewares
 [] setup circle ci
-[] setup heroku
-[] setup 
+[] setup heroku 
+[] fix status routes
 [epic][] setup swagger 
+[] refresh tokens
+[] email signup verfication,
+[] authentication, 
+[] forgot password
+[*] rethink the tables, do we need an Auth Table really?
+    [*] will leave it in for now, to be repurposed later
 +++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++
