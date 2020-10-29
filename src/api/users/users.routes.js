@@ -51,7 +51,7 @@ async function getAccount(id) {
   const account = await User.query().where({ id }).first();
 
   if (!account) throw "Account not found";
-  return account;
+  return basicDetails(account);
 }
 
 async function getAll() {

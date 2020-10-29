@@ -8,8 +8,8 @@
 [] user crud routes 
 [*] write tests
 [] finish up models and relations
-    [] Role
-    [] Role_User
+    [useless][] Role
+    [useless]Role_User
     [] Ticket Type
     [] Ticket Subtype
     [] Ticket
@@ -20,7 +20,7 @@
 [] authentication middlewares
 [] setup circle ci
 [] setup heroku 
-[] fix status routes
+[] fix status routes tests
 [epic][] setup swagger 
 [] refresh tokens
 [] email signup verfication,
