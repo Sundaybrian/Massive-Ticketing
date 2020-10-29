@@ -6,14 +6,15 @@ const users = require("./users/users.routes");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.json({
-    message: "Welcome to ticketing app api v1 ",
-  });
+    res.json({
+        message: "Welcome to ticketing app api v1 ",
+    });
 });
 
 router.use("/status", status);
 router.use("/users", users);
 router.use("/auth", require("./auth/auth.routes"));
 router.use("/department", require("./department/department.routes"));
+router.use("/ticket-types", require("./ticketType/ticketType.routes"));
 
 module.exports = router;
