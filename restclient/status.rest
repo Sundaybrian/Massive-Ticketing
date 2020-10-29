@@ -11,5 +11,5 @@ Content-Type: application/json
 
 {
     "name":"new statuss",
-    "description":"new dessc"
+    "description":"new desscptom"
 }

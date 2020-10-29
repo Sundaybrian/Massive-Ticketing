@@ -1,0 +1,40 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "title": "TicketType",
+    "description": "The TicketType",
+    "required": ["name", "description", "department_id"],
+    "additionalProperties": false,
+    "properties": {
+        "id": {
+            "$id": "#/properties/id",
+            "type": "integer",
+            "title": "The database ID of the TicketType."
+        },
+        "name": {
+            "$id": "#/properties/name",
+            "type": "string",
+            "title": "The name of the TicketType."
+        },
+        "description": {
+            "$id": "#/properties/description",
+            "type": "string",
+            "title": "The description of the TicketType."
+        },
+        "department_id": {
+            "$id": "#/properties/item_type_id",
+            "type": "number",
+            "title": "The id of the department the ticket type belongs to."
+        },
+        "created_at": {
+            "$id": "#/properties/created_at",
+            "type": "string",
+            "title": "The creation date of the ticket type."
+        },
+        "updated_at": {
+            "$id": "#/properties/updated_at",
+            "type": "string",
+            "title": "The date the ticket type was last updated."
+        }
+    }
+}
