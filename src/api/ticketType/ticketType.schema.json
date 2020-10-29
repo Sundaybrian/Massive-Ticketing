@@ -22,7 +22,7 @@
             "title": "The description of the TicketType."
         },
         "department_id": {
-            "$id": "#/properties/item_type_id",
+            "$id": "#/properties/department_id",
             "type": "number",
             "title": "The id of the department the ticket type belongs to."
         },
