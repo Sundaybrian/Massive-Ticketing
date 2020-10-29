@@ -5,10 +5,11 @@ POST http://localhost:5000/api/v1/auth/signup
 Content-Type: application/json
 
 {
-    "fullname": "omwami rules",
-    "email": "omwami@rules.com",
-    "password": "12345678yh",
-    "confirmPassword": "12345678yh"
+    "fullname": "mike test2",
+    "email": "miketest@121223.com",
+    "password": "iamthatguymike2",
+    "confirmPassword": "iamthatguymike2",
+    "role": "Agent"
 }
 
 ### login
