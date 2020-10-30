@@ -8,14 +8,14 @@
 [] user crud routes 
 [*] write tests
 [] finish up models and relations
-    [useless][] Role
-    [useless]Role_User
-    [] Ticket Type
-    [] Ticket Subtype
+    [useless][*] Role
+    [useless][*]Role_User
+    [*] Ticket Type
+    [*] Ticket Subtype
     [] Ticket
     [] Ticket history
     [] Sla
-    [] status
+    [*] status
     [] Resolution
 [] authentication middlewares
 [] setup circle ci

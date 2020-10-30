@@ -27,8 +27,11 @@ async function getTicketTypeById(req, res, next) {
             .where({ deleted_at: null, id: req.params.id })
             .withGraphFetched("ticket_subtypes")
             .first();
+        if (items) {
+            res.json(items);
+        }
 
-        res.json(items);
+        res.status(404).json({ message: "Not found" });
     } catch (error) {
         next(error);
     }
@@ -38,8 +41,9 @@ async function createTicketType(req, res, next) {
     try {
         // TODO:authorization middleware, only admins can create tickettypes
         const item = await TicketType.query().insert(req.body);
-        res.json(item);
+        res.status(201).json(item);
     } catch (error) {
+        console.log(error);
         next(error);
     }
 }
@@ -65,7 +69,6 @@ async function updateTicketType(req, res, next) {
         const item = await TicketType.query().patchAndFetchById(req.params.id, {
             ...req.body,
         });
-
         res.json(item);
     } catch (error) {
         next(error);

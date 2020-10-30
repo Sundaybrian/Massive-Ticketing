@@ -60,4 +60,62 @@ exports.seed = async (knex) => {
             description: "lorem ipum lorem ipsum lorem",
         },
     ]);
+
+    // Inserts seed entries
+    await knex(tableNames.department).insert([
+        {
+            id: 1,
+            name: "Power",
+            description: "Deals with power",
+        },
+        {
+            id: 2,
+            name: "Finance",
+            description: "Deals with finance things",
+        },
+    ]);
+
+    // Inserts seed entries
+    await knex(tableNames.ticket_type).insert([
+        {
+            id: 1,
+            name: "Power",
+            description: "Deals with power",
+            department_id: 1,
+        },
+        {
+            id: 2,
+            name: "Billing",
+            description: "Deals with billing",
+            department_id: 2,
+        },
+    ]);
+
+    // Inserts seed entries
+    await knex(tableNames.ticket_subtype).insert([
+        {
+            id: 1,
+            name: "No Power",
+            ticket_type_id: 1,
+            description: "no power",
+        },
+        {
+            id: 2,
+            name: "Low Voltage",
+            ticket_type_id: 1,
+            description: "low voltage",
+        },
+        {
+            id: 3,
+            name: "Overdraft",
+            ticket_type_id: 2,
+            description: "deals with overdraft",
+        },
+        {
+            id: 4,
+            name: "Balance",
+            ticket_type_id: 2,
+            description: "Deals na balance",
+        },
+    ]);
 };
