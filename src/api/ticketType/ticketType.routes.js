@@ -1,6 +1,6 @@
 const express = require("express");
 const TicketType = require("./ticketType.model");
-const TicketSubtype = require("./ticketSubtype/ti cketSubtype.routes");
+const TicketSubtype = require("./ticketSubtype/ticketSubtype.routes");
 
 const router = express.Router({ mergeParams: true });
 

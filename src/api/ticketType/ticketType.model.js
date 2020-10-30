@@ -1,7 +1,7 @@
 const { Model } = require("objection");
 
 const tableNames = require("../../constants/tableNames");
-const schema = require("./items.schema.json");
+const schema = require("./ticketType.schema.json");
 const TicketSubtype = require("./ticketSubtype/ticketSubtype.model");
 
 class TicketType extends Model {
