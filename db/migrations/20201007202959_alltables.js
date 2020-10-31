@@ -54,7 +54,7 @@ exports.up = async function (knex) {
     await knex.schema.createTable(tableNames.ticket, (table) => {
         table.increments().notNullable();
         table.string("issue_summary", 600).notNullable();
-        table.string("description", 1300).notNullable();
+        table.string("description", 1500).notNullable();
         references(table, tableNames.user);
         references(table, tableNames.ticket_subtype);
         addDefaultColumns(table);
