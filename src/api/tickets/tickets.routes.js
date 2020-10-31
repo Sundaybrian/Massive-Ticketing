@@ -2,7 +2,7 @@ const express = require("express");
 
 const { createSchema } = require("./tickets.validators");
 const Ticket = require("./tickets.model");
-const TicketHistory = require("./ticketHistory/ticketHistory.model");
+const TicketHistory = require("./ticketHistory/ticketHistory.routes");
 
 const router = express.Router({
     mergeParams: true,
@@ -11,4 +11,69 @@ const router = express.Router({
 // api/v1/tickets/1/ticket-history
 router.use("/:ticket_id/ticketHistory", TicketHistory);
 
+router.get("/", getAllTickets);
+router.get("/:id", getTicketById);
+router.post("/", createSchema, createTicket);
+router.delete("/:id", deleteOne);
+
+async function getAllTickets(req, res, next) {
+    try {
+        const tickets = await Ticket.query().where("deleted_at", null);
+        res.json(tickets);
+    } catch (error) {
+        next(error);
+    }
+}
+
+// TODO owner, admin or agent middleware
+async function getTicketById(req, res, next) {
+    const { id } = req.params;
+    try {
+        const ticket = await Ticket.query().where({
+            deleted_at: null,
+            id,
+        });
+
+        if (!ticket) {
+            return res.status(404).json({ message: "Ticket not found" });
+        }
+
+        res.json(ticket);
+    } catch (error) {
+        next(error);
+    }
+}
+
+async function createTicket(req, res, next) {
+    const {
+        user_id: { user },
+        issue_summary,
+        description,
+        ticket_subtype_id,
+    } = req.body;
+    try {
+        const ticket = await Ticket.query().insert({
+            user_id,
+            issue_summary,
+            description,
+            ticket_subtype_id,
+        });
+
+        res.status(201).json(ticket);
+    } catch (error) {
+        next(error);
+    }
+}
+
+// TODO AUTH MIDDLEWARE ONLY ADMINS AND OWNER CAN DELETE
+async function deleteOne(req, res, next) {
+    const { id } = req.params;
+    try {
+        const ticket = await Ticket.query().delete({ id });
+
+        res.status(200).json({ message: "Ticket Deleted", ticket });
+    } catch (error) {
+        next(error);
+    }
+}
 module.exports = router;
