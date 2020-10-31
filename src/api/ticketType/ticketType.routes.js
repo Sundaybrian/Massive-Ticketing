@@ -38,12 +38,16 @@ async function getTicketTypeById(req, res, next) {
 }
 
 async function createTicketType(req, res, next) {
+    const { name, description, department_id } = req.body;
     try {
         // TODO:authorization middleware, only admins can create tickettypes
-        const item = await TicketType.query().insert(req.body);
+        const item = await TicketType.query().insert({
+            name,
+            description,
+            department_id,
+        });
         res.status(201).json(item);
     } catch (error) {
-        console.log(error);
         next(error);
     }
 }

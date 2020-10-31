@@ -1,0 +1,9 @@
+###
+POST http://localhost:5000/api/v1/ticket-types/
+Content-Type: application/json
+
+{
+     "name":"Power test2",
+     "description": "Deals with power",
+    "department_id": 1
+}
