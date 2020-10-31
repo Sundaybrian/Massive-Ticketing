@@ -1,0 +1,51 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "title": "Ticket",
+    "description": "The Ticket",
+    "required": [
+        "user_id",
+        "issue_summary",
+        "description",
+        "ticket_subtype_id"
+    ],
+    "additionalProperties": false,
+    "properties": {
+        "id": {
+            "$id": "#/properties/id",
+            "type": "integer",
+            "title": "The database ID of the ticket."
+        },
+        "user_id": {
+            "$id": "#/properties/user_id",
+            "type": "number",
+            "title": "The id of the owner."
+        },
+        "issue_summmary": {
+            "$id": "#/properties/issue_summmary",
+            "type": "string",
+            "title": "The issue_summmary.",
+            "examples": ["some short desc of the issue"]
+        },
+        "description": {
+            "$id": "#/properties/description",
+            "type": "string",
+            "title": "The description of the problem."
+        },
+        "ticket_subtype_id": {
+            "$id": "#/properties/ticket_subtype_id",
+            "type": "number",
+            "title": "The id of subtype."
+        },
+        "created_at": {
+            "$id": "#/properties/created_at",
+            "type": "string",
+            "title": "The creation date when the ticket was created."
+        },
+        "updated_at": {
+            "$id": "#/properties/updated_at",
+            "type": "string",
+            "title": "The date when the ticket was updated."
+        }
+    }
+}
