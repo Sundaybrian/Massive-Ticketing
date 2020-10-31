@@ -17,7 +17,9 @@
     [] Sla
     [*] status
     [] Resolution
-[] authentication middlewares
+[] auth middlewares
+    [] authorize middleware
+    [] authenticate
 [] setup circle ci
 [] setup heroku 
 [] fix status routes tests

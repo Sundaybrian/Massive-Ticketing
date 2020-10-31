@@ -45,12 +45,8 @@ async function getTicketById(req, res, next) {
 }
 
 async function createTicket(req, res, next) {
-    const {
-        user_id: { user },
-        issue_summary,
-        description,
-        ticket_subtype_id,
-    } = req.body;
+    const { issue_summary, description, ticket_subtype_id } = req.body;
+    const { user_id } = req.user;
     try {
         const ticket = await Ticket.query().insert({
             user_id,
