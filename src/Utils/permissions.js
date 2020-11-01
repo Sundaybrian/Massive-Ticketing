@@ -9,7 +9,7 @@ function canView(user, item) {
 }
 
 function scopedItems(user, items) {
-    if (user.role == role.Admin) return items;
+    if (user.role == role.Admin || user.role == role.Agent) return items;
     return items.filter((item) => item.user_id == user.id);
 }
 

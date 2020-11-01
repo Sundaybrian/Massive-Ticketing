@@ -1,6 +1,12 @@
 const express = require("express");
 
 const auth = require("../../_middlewares/auth");
+const {
+    canView,
+    scopedItems,
+    canDeleteItem,
+} = require("../../Utils/permissions");
+
 const { createSchema } = require("./tickets.validators");
 const Ticket = require("./tickets.model");
 const TicketHistory = require("./ticketHistory/ticketHistory.routes");
@@ -20,7 +26,8 @@ router.delete("/:id", auth, deleteOne);
 async function getAllTickets(req, res, next) {
     try {
         const tickets = await Ticket.query().where("deleted_at", null);
-        res.json(tickets);
+
+        res.json(scopedItems(req.user, tickets));
     } catch (error) {
         next(error);
     }
@@ -37,6 +44,10 @@ async function getTicketById(req, res, next) {
 
         if (!ticket) {
             return res.status(404).json({ message: "Ticket not found" });
+        }
+
+        if (!canView(req.user, ticket)) {
+            return res.status(401).json({ message: "unathorized" });
         }
 
         res.json(ticket);
@@ -56,21 +67,49 @@ async function createTicket(req, res, next) {
             ticket_subtype_id,
         });
 
-        res.status(201).json(ticket);
+        res.status(201).json({ ...basicDetails(ticket) });
     } catch (error) {
         next(error);
     }
 }
 
-// TODO AUTH MIDDLEWARE ONLY ADMINS AND OWNER CAN DELETE
 async function deleteOne(req, res, next) {
     const { id } = req.params;
     try {
-        const ticket = await Ticket.query().delete({ id });
+        const ticket = await getTicket(id);
 
-        res.status(200).json({ message: "Ticket Deleted", ticket });
+        if (!canDeleteItem(req.user, ticket)) {
+            res.status(401).json({ message: "Unauthorized" });
+        }
+
+        await Ticket.query().delete({ id });
+
+        res.status(200).json({
+            message: "Ticket Deleted",
+            ticket: basicDetails(ticket),
+        });
     } catch (error) {
         next(error);
     }
 }
+
+// =============== helper functions ===================//
+async function getTicket(id) {
+    const ticket = await Ticket.query().where({ id }).first();
+
+    if (!ticket) throw "ticket not found";
+    return ticket;
+}
+
+async function basicDetails(ticket) {
+    const {
+        id,
+        user_id,
+        issue_summary,
+        description,
+        ticket_subtype_id,
+    } = ticket;
+    return { id, user_id, issue_summary, description, ticket_subtype_id };
+}
+
 module.exports = router;
