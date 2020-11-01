@@ -17,9 +17,10 @@
     [] Sla
     [*] status
     [] Resolution
-[] auth middlewares
-    [] authorize middleware
-    [] authenticate
+[*] auth middlewares
+[]permission middlewares
+    [] canView
+    [] 
 [] setup circle ci
 [] setup heroku 
 [] fix status routes tests
@@ -31,5 +32,7 @@
 [] rate limiting
 [*] rethink the tables, do we need an Auth Table really?
     [*] will leave it in for now, to be repurposed later
+[] rethink Sla
+    
 +++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++

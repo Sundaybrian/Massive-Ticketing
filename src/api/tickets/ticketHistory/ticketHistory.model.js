@@ -4,7 +4,6 @@ const schema = require("./ticketHistory.schema.json");
 const tableNames = require("../../../constants/tableNames");
 const User = require("../../users/users.model");
 const Ticket = require("../tickets.model");
-const Status = require("../../meta/status");
 
 class TicketHistory extends Model {
     static get tableName() {
@@ -33,14 +32,14 @@ class TicketHistory extends Model {
                     to: `${tableNames.user}.id`,
                 },
             },
-            status: {
-                relation: Model.BelongsToOneRelation,
-                modelClass: Status,
-                join: {
-                    from: `${tableNames.ticket_history}.status_id`,
-                    to: `${tableNames.status}.id`,
-                },
-            },
+            // status: {
+            //     relation: Model.BelongsToOneRelation,
+            //     modelClass: Status,
+            //     join: {
+            //         from: `${tableNames.ticket_history}.status_id`,
+            //         to: `${tableNames.status}.id`,
+            //     },
+            // },
 
             // sla: {
             //     relation: Model.BelongsToOneRelation,

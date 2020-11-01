@@ -12,10 +12,10 @@ const router = express.Router({
 // api/v1/tickets/1/ticket-history
 router.use("/:ticket_id/ticketHistory", TicketHistory);
 
-router.get("/", getAllTickets);
-router.get("/:id", getTicketById);
+router.get("/", auth, getAllTickets);
+router.get("/:id", auth, getTicketById);
 router.post("/", auth, createSchema, createTicket);
-router.delete("/:id", deleteOne);
+router.delete("/:id", auth, deleteOne);
 
 async function getAllTickets(req, res, next) {
     try {

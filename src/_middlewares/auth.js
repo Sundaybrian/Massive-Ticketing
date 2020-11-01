@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const User = require("../api/users/users.model");
 
 async function auth(req, res, next) {
     let token;
@@ -14,11 +15,19 @@ async function auth(req, res, next) {
         });
     }
 
-    // verify token
+    // verify token and account
     try {
         const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
 
+        const user = await User.query()
+            .where({ email: decodedToken.user.email })
+            .first();
+        if (!user) {
+            return res.status(401).json({ message: "Unauthorized" });
+        }
+
         req.user = decodedToken.user;
+
         next();
     } catch (error) {
         next(error);
