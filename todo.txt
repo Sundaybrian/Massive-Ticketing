@@ -26,8 +26,9 @@
 [epic][] setup swagger 
 [] refresh tokens
 [] email signup verfication,
-[] authentication, 
 [] forgot password
+[] setup firebase storage
+[] rate limiting
 [*] rethink the tables, do we need an Auth Table really?
     [*] will leave it in for now, to be repurposed later
 +++++++++++++++++++++++++++++++++++++++++++++++++
