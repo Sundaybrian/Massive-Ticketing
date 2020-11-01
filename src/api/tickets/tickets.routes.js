@@ -1,5 +1,6 @@
 const express = require("express");
 
+const auth = require("../../_middlewares/auth");
 const { createSchema } = require("./tickets.validators");
 const Ticket = require("./tickets.model");
 const TicketHistory = require("./ticketHistory/ticketHistory.routes");
@@ -13,7 +14,7 @@ router.use("/:ticket_id/ticketHistory", TicketHistory);
 
 router.get("/", getAllTickets);
 router.get("/:id", getTicketById);
-router.post("/", createSchema, createTicket);
+router.post("/", auth, createSchema, createTicket);
 router.delete("/:id", deleteOne);
 
 async function getAllTickets(req, res, next) {
