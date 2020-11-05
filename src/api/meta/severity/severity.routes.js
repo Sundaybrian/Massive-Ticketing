@@ -1,15 +1,15 @@
 const express = require("express");
 const router = express.Router();
 
-const queries = require("./sla.queries");
-const { createSchema } = require("./sla.validators");
+const queries = require("./severity.queries");
+const { createSchema } = require("./severity.validators");
 
 // find all
 router.get("/", async (req, res, next) => {
     try {
-        const slas = await queries.find();
-        if (slas.length > 0) {
-            res.json(slas);
+        const severity = await queries.find();
+        if (severity.length > 0) {
+            res.json(severity);
         }
     } catch (error) {
         next(error);
@@ -20,9 +20,9 @@ router.get("/", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
     try {
         const { id } = req.params;
-        const sla = await queries.get(parseInt(id) || 0);
-        if (sla) {
-            res.json(sla);
+        const severity = await queries.get(parseInt(id) || 0);
+        if (severity) {
+            res.json(severity);
         }
 
         return next();
@@ -35,10 +35,10 @@ router.get("/:id", async (req, res, next) => {
 router.post("/", createSchema, async (req, res, next) => {
     try {
         console.log(req.body);
-        const sla = await queries.create(req.body);
+        const severity = await queries.create(req.body);
 
-        if (sla) {
-            return res.status(201).json(sla);
+        if (severity) {
+            return res.status(201).json(severity);
         }
     } catch (error) {
         next(error);
@@ -60,13 +60,13 @@ router.patch("/:id", async (req, res, next) => {
     }
 
     try {
-        const sla = await queries.update(id, req.body);
+        const severity = await queries.update(id, req.body);
 
-        if (!sla) {
+        if (!severity) {
             return res.status(404);
         }
 
-        res.status(200).json(sla);
+        res.status(200).json(severity);
     } catch (error) {
         next(error);
     }

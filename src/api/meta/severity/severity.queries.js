@@ -2,9 +2,9 @@ const db = require("../../../db");
 const tableNames = require("../../../constants/tableNames");
 
 module.exports = {
-    // get all sla
+    // get all severity
     find() {
-        return db(tableNames.sla).select(
+        return db(tableNames.severity).select(
             "id",
             "name",
             "description",
@@ -13,29 +13,29 @@ module.exports = {
     },
     // get by id
     async get(id) {
-        const [sla] = await db(tableNames.sla)
+        const [severity] = await db(tableNames.severity)
             .select("id", "name", "description", "resolution_time")
             .where({
                 id,
             });
 
-        return sla;
+        return severity;
     },
-    // create a sla
+    // create a severity
     async create(item) {
-        const [sla] = await db(tableNames.sla).insert(item, [
+        const [severity] = await db(tableNames.severity).insert(item, [
             "id",
             "name",
             "description",
             "resolution_time",
             "update_timeline",
         ]);
-        return sla;
+        return severity;
     },
 
-    //update sla
+    //update severity
     async update(id, payload) {
-        const [sla] = await db(tableNames.sla)
+        const [severity] = await db(tableNames.severity)
             .where({ id })
             .update({ ...payload }, [
                 "id",
@@ -44,8 +44,8 @@ module.exports = {
                 "resolution_time",
             ]);
 
-        return sla;
+        return severity;
     },
 
-    // TODO: should we delete a sla delete status
+    // TODO: should we delete a severity delete status
 };

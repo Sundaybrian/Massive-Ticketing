@@ -66,7 +66,7 @@ exports.up = async function (knex) {
         references(table, tableNames.user, "assigned_staff");
         references(table, tableNames.status);
         references(table, tableNames.ticket);
-        references(table, tableNames.sla);
+        references(table, tableNames.severity);
         table.string("comment", 1500).notNullable();
         addDefaultColumns(table);
     });

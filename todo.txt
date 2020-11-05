@@ -1,4 +1,6 @@
 =================================================
+Basic
+=================================================
 [*] sign up
 [*] sign in
 [*] jwt
@@ -12,28 +14,38 @@
     [useless][*]Role_User
     [*] Ticket Type
     [*] Ticket Subtype
-    [] Ticket
-        [] should have status field
+    [*] Ticket
+        [*] should have status field
     [*] Ticket history
-    [] Sla
+    [*] Sla
     [*] status
-    [] Resolution
+  
 [*] auth middlewares
 [*]permission middlewares
-    [] canView
-    [] 
+    [*] canView
 [] setup circle ci
+[] setup docker
 [] setup heroku 
 [] fix status routes tests
+
+==============================================================
+Nice to have
+==============================================================
 [epic][] setup swagger 
 [] refresh tokens
 [] email signup verfication,
 [] forgot password
 [] setup firebase storage
 [] rate limiting
+
+    
++++++++++++++++++++++++++++++++++++++++++++++++++
+Review
++++++++++++++++++++++++++++++++++++++++++++++++++
 [*] rethink the tables, do we need an Auth Table really?
     [*] will leave it in for now, to be repurposed later
 [] rethink Sla
-    
-+++++++++++++++++++++++++++++++++++++++++++++++++
-+++++++++++++++++++++++++++++++++++++++++++++++++
+[] Resolution
+[*] sla table to serverity table
+[] status with sla column
+[] research escalation matrix
