@@ -33,7 +33,6 @@ async function getAllTickets(req, res, next) {
     }
 }
 
-// TODO owner, admin or agent middleware
 async function getTicketById(req, res, next) {
     const { id } = req.params;
     try {

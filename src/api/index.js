@@ -16,6 +16,6 @@ router.use("/users", users);
 router.use("/auth", require("./auth/auth.routes"));
 router.use("/department", require("./department/department.routes"));
 router.use("/ticket-types", require("./ticketType/ticketType.routes"));
-router.use("tickets", require("./tickets/tickets.routes"));
+router.use("/tickets", require("./tickets/tickets.routes"));
 
 module.exports = router;

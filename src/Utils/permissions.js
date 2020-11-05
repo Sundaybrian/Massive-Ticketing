@@ -16,8 +16,13 @@ function scopedItems(user, items) {
 function canDeleteItem(user, item) {
     return user.role === role.Admin || item.user_id == user.id;
 }
+
+function canCreateHistory(user) {
+    return user.role === role.Agent;
+}
 module.exports = {
     canView,
     scopedItems,
     canDeleteItem,
+    canCreateHistory,
 };
