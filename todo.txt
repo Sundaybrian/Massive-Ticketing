@@ -12,7 +12,7 @@
     [useless][*]Role_User
     [*] Ticket Type
     [*] Ticket Subtype
-    [*] Ticket
+    [] Ticket
         [] should have status field
     [*] Ticket history
     [] Sla
