@@ -12,13 +12,14 @@
     [useless][*]Role_User
     [*] Ticket Type
     [*] Ticket Subtype
-    [] Ticket
-    [] Ticket history
+    [*] Ticket
+        [] should have status field
+    [*] Ticket history
     [] Sla
     [*] status
     [] Resolution
 [*] auth middlewares
-[]permission middlewares
+[*]permission middlewares
     [] canView
     [] 
 [] setup circle ci

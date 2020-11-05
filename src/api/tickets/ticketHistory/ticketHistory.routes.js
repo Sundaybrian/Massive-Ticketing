@@ -3,6 +3,8 @@ const TicketHistory = require("./ticketHistory.model");
 const { canCreateHistory } = require("../../../Utils/permissions");
 const Ticket = require("../tickets.model");
 
+const auth = require("../../../_middlewares/auth");
+
 router.get("/", auth, getTicketHistories);
 router.post("/", auth, createHistory);
 
