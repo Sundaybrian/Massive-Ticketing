@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 
 const queries = require("./status.queries");
-
 // find all
 router.get("/", async (req, res, next) => {
     try {
