@@ -1,0 +1,11 @@
+### create status
+POST http://localhost:5000/api/v1/severity
+Content-Type: application/json
+
+{
+     "name": "Enquiry",
+                "description": "Deals with power",
+                "resolution_time": 2,
+                "update_timeline": 24
+
+}

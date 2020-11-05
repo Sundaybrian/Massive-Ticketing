@@ -34,12 +34,12 @@ router.get("/:id", async (req, res, next) => {
 // create status
 router.post("/", createSchema, async (req, res, next) => {
     try {
-        console.log(req.body);
         const severity = await queries.create(req.body);
 
         if (severity) {
             return res.status(201).json(severity);
         }
+        console.log(severity);
     } catch (error) {
         next(error);
     }

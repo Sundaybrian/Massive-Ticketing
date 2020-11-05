@@ -17,6 +17,6 @@ router.use("/auth", require("./auth/auth.routes"));
 router.use("/department", require("./department/department.routes"));
 router.use("/ticket-types", require("./ticketType/ticketType.routes"));
 router.use("/tickets", require("./tickets/tickets.routes"));
-router.use("/sla", require("./meta/severity/severity.routes"));
+router.use("/severity", require("./meta/severity/severity.routes"));
 
 module.exports = router;

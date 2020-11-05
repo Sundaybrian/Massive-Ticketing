@@ -49,3 +49,4 @@ Review
 [*] sla table to serverity table
 [] status with sla column
 [] research escalation matrix
+[] setup logger for errors during test/development

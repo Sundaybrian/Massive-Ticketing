@@ -55,6 +55,18 @@ exports.seed = async (knex) => {
         },
     ]);
 
+    // Inserts seed entries department
+    await knex(tableNames.department).insert([
+        {
+            name: "Power",
+            description: "Deals with power",
+        },
+        {
+            name: "Finance",
+            description: "Deals with finance things",
+        },
+    ]);
+
     // Inserts seed entries
     await knex(tableNames.ticket_type).insert([
         {
@@ -90,18 +102,6 @@ exports.seed = async (knex) => {
             name: "Balance",
             ticket_type_id: 2,
             description: "Deals na balance",
-        },
-    ]);
-
-    // Inserts seed entries
-    await knex(tableNames.department).insert([
-        {
-            name: "Power",
-            description: "Deals with power",
-        },
-        {
-            name: "Finance",
-            description: "Deals with finance things",
         },
     ]);
 

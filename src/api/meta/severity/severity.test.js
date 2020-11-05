@@ -31,16 +31,40 @@ describe("Get /api/v1/severity/:id", () => {
 });
 
 describe("POST /api/v1/severity", () => {
-    it("Should return a created severity", async () => {
+    it("Should fail to create a severity", async () => {
         const res = await request(app)
             .post("/api/v1/severity")
             .send({
                 name: "test severity",
                 description: "test severity desc 2",
             })
+            .expect(500);
+    });
+
+    it("Should fail to create a duplicate severity", async () => {
+        const res = await request(app)
+            .post("/api/v1/severity")
+            .send({
+                name: "Major",
+                description: "Deals with power",
+                resolution_time: 12,
+                update_timeline: 24,
+            })
+            .expect(500);
+    });
+
+    it("Should create a severity", async () => {
+        const res = await request(app)
+            .post("/api/v1/severity")
+            .send({
+                name: "Enquiry",
+                description: "Deals with power",
+                resolution_time: 2,
+                update_timeline: 24,
+            })
             .expect(201);
 
-        expect(res.body.name).toEqual("test severity");
+        expect(res.body.name).toEqual("Enquiry");
     });
 });
 
